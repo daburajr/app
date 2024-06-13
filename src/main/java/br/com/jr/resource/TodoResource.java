@@ -54,5 +54,12 @@ public class TodoResource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") int id) {
+        todoService.delete(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
 
 }

@@ -41,4 +41,8 @@ public class TodoService {
         todo.setId(id);
         todoMapper.update(todo);
     }
+
+    public void delete(int id) {
+        todoMapper.delete(id);
+    }
 }

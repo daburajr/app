@@ -19,4 +19,5 @@ public interface TodoMapper {
 
     void update(@Param("todo") Todo todo);
 
+    void delete(int id);
 }
