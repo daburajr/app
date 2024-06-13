@@ -27,7 +27,14 @@ public class TodoResource {
     @GET
     @Path("/{id}")
     public Todo findById(@PathParam("id") int id) {
-        return todoService.findById(id);
+        Todo todo = todoService.findById(id);
+
+        if (todo == null) {
+            throw new NotFoundException("Todo not found");
+        }
+
+        return todo;
+
     }
 
     @GET
