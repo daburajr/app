@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.com.jr.mapper.TodoMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
+        INSERT INTO todo (id, titulo, done)
+        VALUES (DEFAULT, #{todo.title}, #{todo.completed});
+    </insert>
+
+    <update id="update">
+        UPDATE todo
+        SET titulo = #{todo.title},
+            done = #{todo.completed}
+        WHERE id = #{todo.id};
+    </update>
+
+    <select id="findById" resultType="br.com.jr.model.Todo">
+        select id as id, titulo as title, done as completed from todo where id = ${id};
+    </select>
+
+    <select id="findAll" resultType="br.com.jr.model.Todo">
+        select id as id, titulo as title, done as completed, count(*) over() as size
+        from todo
+        order by id
+        OFFSET (#{pageable.page} - 1) * #{pageable.size}
+            LIMIT #{pageable.size}
+    </select>
+
+</mapper>
